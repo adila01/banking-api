@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1234",
+    "userName": "Nora Charles",
+    "description": "This is the savings account of one Nora Charles",
+    "dob": "01/01/1980"
+  },
+  {
+    "id": "4321",
+    "userName": "Ray Charles",
+    "description": "This is the savings account of one Ray Charles",
+    "dob": "01/01/1980"
+  }  
+]

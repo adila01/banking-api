@@ -1,0 +1,14 @@
+[
+  { 
+    "sourceAccount_id" : "a2esd212343123",
+    "targetAccount_id" : "3523djfg329548",
+    "amount": 1000.00,
+    "description": "A written description of the transaction, provided at creation."
+  },
+  { 
+    "sourceAccount_id" : "a2esd212343123",
+    "targetAccount_id" : "3523djfg123123",
+    "amount": 1024.00,
+    "description": "This is the other description, again provided at creation."
+  }
+]
