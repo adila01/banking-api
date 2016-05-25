@@ -1,101 +1,98 @@
-#%RAML 0.8
+#%RAML 1.0
 title: Mobile Banking API
 version: 1.0
-#baseUri: http://www.placeholder.com/api
-baseUri: http://mocksvc.mulesoft.com/mocks/cf0fa2ec-2609-4271-8316-e81dedddccd2/api
+baseUri: http://www.placeholder.com/api
 
 documentation:
   - title: My Banking API
-    content: This is the full API for instructors to use (or cut down) as a base for the API Design for the Anypoint Platform class.  The student's job will be to expand the API definition to have greater functionality. <br><br> As the instructor, you have the option of providing them several scales of completion, either by providing all the resource-method pairings and asking them to complete logical query or response bodies, or only a few pairings, and requiring the students to intuit logical requirements for a mobile banking API. The repo will contain a few options.
+    content: |
+      This is the full API for instructors to use (or cut down) as a base for the API Design for the Anypoint Platform class.  The student's job will be to expand the API definition to have greater functionality. <br><br> As the instructor, you have the option of providing them several scales of completion, either by providing all the resource-method pairings and asking them to complete logical query or response bodies, or only a few pairings, and requiring the students to intuit logical requirements for a mobile banking API. The repo will contain a few options.
 
 mediaType: application/json
 
-schemas:
-  - Customer: !include schemas/customer.json
-  - Account: !include schemas/account.json    
+types:
+  Customer: !include schemas/customer.json
+  Account: !include schemas/account.json
+  customerID:
+    type: integer
 
 resourceTypes:
-  - collection: !include resourcetypes/collection.yml
-  - member: !include resourcetypes/member.yml
+  collection: !include resourcetypes/collection.yml
+  member: !include resourcetypes/member.yml
 
 traits:
-  - searchable: !include traits/searchable.yml
-  - orderable: !include traits/orderable.yml
-  - pageable: !include traits/pageable.yml
-
-securitySchemes:
-  - oauth_2_0: !include security/oauth_2_0.yml
+  searchable: !include traits/searchable.yml
+  orderable: !include traits/orderable.yml
+  pageable: !include traits/pageable.yml
+  basic_authenticated: !include traits/basic_authenticated.yml
 
 /customers:
   description: The full collection of all users with accounts at the bank.
-  type: collection
   get:
     description: Retrieve a list of all the Bank's customers.
     responses:
-      200: 
-        body: 
-          example:
-            !include examples/customers.json
+      200:
+        body:
+          example: !include examples/customers.json
   post:
     description: Adds a new user to the Bank's customer listing.
     body:
-      schema:
-        !include schemas/customer.json
+      schema: !include schemas/customer.json
 
   /{customer_id}:
-    put: 
-    description: Replace the customer listing indicated.
+    uriParameters:
+      customer_id:
+        type: integer
+    put:
+      description: Replace a single customer
+      body:
+        schema: !include schemas/customer.json
     /accounts:
       type: collection
       get:
         description: Retrieve a list of bank accounts belonging to a single customer.
         responses:
-          200: 
-            body: 
-              example:
-                !include examples/accounts.json
+          200:
+            body:
+              example: !include examples/accounts.json
       post:
         description: Add a new bank account to a customer.
       /{account_id}:
-        get: 
+        type: member
+        get:
           description: Retrieve the details for a particular bank account belonging to a customer.
         put:
           description: Replace a customer's bank account.
         delete:
           description: Remove a customer's bank account.
         /outgoingTransfers:
-          type: collection    
+          type: collection
           get:
-            is: [pageable]     
+            is: [pageable]
             description: Retrieve a list of transfers that have been sent from a customer's bank account.
-            body: 
-              example:
-                !include examples/transfers_out.json
+            body:
+              example: !include examples/transfers_out.json
           post:
             description: Create a new outgoing transaction.
             body:
-              example:
-                !include examples/transfer.json
+              example: !include examples/transfer.json
           /{transfer_id}:
             get:
               body:
-                example:
-                  !include examples/transfer.json
+                example: !include examples/transfer.json
         /incomingTransfers:
           type: collection
           get:
-            body: 
-              example:
-                !include examples/transfers_in.json
+            body:
+              example: !include examples/transfers_in.json
           /{transfer_id}:
+            type: member
             get:
               body:
-                example:
-                  !include examples/transfer.json
+                example: !include examples/transfer.json
     /transfers:
       type: collection
       get:
         description: Retrieve a list of all incoming and outgoing transfers associated with a particular customer.
-        body: 
-          example:
-            !include examples/transfers.json
+        body:
+          example: !include examples/transfers.json
