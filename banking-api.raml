@@ -1,6 +1,8 @@
 #%RAML 1.0
 title: ACME Banking API
-version: 1.0
+version: 2.0
+#baseUri: http://www.placeholder.com/api
+baseUri: https://mocksvc.mulesoft.com/mocks/4b796b61-e401-48cb-9aae-312a308f8508/api
 
 documentation:
   - title: ACME Banking API
@@ -23,8 +25,10 @@ traits:
   pageable: !include traits/pageable.yml
   basic_authenticated: !include traits/basic_authenticated.yml
 
-/customers:
+
+/customers: 
   description: The full collection of all users with accounts at the bank.
+  type: collection
   get:
     description: Retrieve a list of all the Bank's customers.
     responses:
@@ -36,6 +40,7 @@ traits:
     body:
       schema: !include schemas/customer.json
   /{customer_id}:
+    type: member
     uriParameters:
       customer_id:
         type: integer
@@ -59,7 +64,7 @@ traits:
       post:
         description: Add a new bank account to a customer.
         body:
-          schema: !include schemas/account.json
+          schema: !include schemas/account.json         
       /{account_id}:
         type: member
         uriParameters:
@@ -70,11 +75,11 @@ traits:
           responses:
             200:
               body:
-                example: !include examples/account.json
+                example: !include examples/account.json               
         put:
           description: Replace a customer's bank account.
           body:
-            schema: !include schemas/account.json
+            schema: !include schemas/account.json     
         delete:
           description: Remove a customer's bank account.
         /outgoingTransfers:
@@ -91,6 +96,10 @@ traits:
             body:
               example: !include examples/transfer.json
           /{transfer_id}:
+            type: member
+            uriParameters:
+              transfer_id:
+                type: integer
             get:
               responses:
                 200:
@@ -105,6 +114,9 @@ traits:
                   example: !include examples/transfers_in.json
           /{transfer_id}:
             type: member
+            uriParameters:
+              transfer_id:
+                type: integer
             get:
               responses:
                 200:
