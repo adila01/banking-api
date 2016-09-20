@@ -1,0 +1,14 @@
+description: A single account
+uriParameters:
+  account_id:
+    type: integer
+get:
+  description: Retrieve a specific account
+  responses:
+    200:
+      body:
+        application/json:
+          schema: !include ../../schemas/accounts/account_member.json
+          example: !include ../../examples/accounts/account_member.json
+delete:
+  description: Remove a bank account.

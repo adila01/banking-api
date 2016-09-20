@@ -1,0 +1,14 @@
+description: A single customer
+uriParameters:
+  customer_id:
+    type: integer
+get:
+  description: Retrieve a specific customer
+  responses:
+    200:
+      body:
+        application/json:
+          schema: !include ../../schemas/customers/customer_member.json
+          example: !include ../../examples/customers/customer_member.json
+delete:
+  description: Remove a specific customer

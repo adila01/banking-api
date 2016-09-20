@@ -1,0 +1,15 @@
+description: Collection of transfers from one account to another
+get:
+  is: [pageable, orderable: {fieldsList : targetAccount_id}]
+  description: Retrieve a list of transfers that have been sent from a customer's bank account.
+  responses:
+    200:
+      body:
+        application/json:
+          example: !include ../../examples/transfers/transfer_collection.json
+post:
+  description: Create a new outgoing transaction.
+  body:
+    application/json:
+      example: !include ../../examples/transfers/transfer_member.json
+      schema: !include ../../schemas/transfers/transfer_member.json

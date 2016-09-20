@@ -4,16 +4,16 @@
   "id": "http://jsonschema.net",
   "required": true,
   "properties": {
-    "account_id": {
+    "id": {
       "type": "string",
       "required": true
       },
-    "user_id": {
+    "userName": {
       "type": "string",
       "required": true
       },
-    "money": {
-      "type": "number",
+    "dob": {
+      "type": "string",
       "required": true
       }
     }

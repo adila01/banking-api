@@ -4,18 +4,21 @@
   "id": "http://jsonschema.net",
   "required": true,
   "properties": {
-    "id": {
+    "sourceAccount_id": {
       "type": "string",
       "required": true
       },
-    "userName": {
+    "targetAccount_id": {
       "type": "string",
       "required": true
       },
-    "dob": {
+    "amount": {
+      "type": "number",
+      "required": true
+    },
+    "description": {
       "type": "string",
-      "required": true,
-      "format": "YYYY-MM-DD"
+      "required": false
       }
     }
 }

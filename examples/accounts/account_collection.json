@@ -1,12 +1,12 @@
 [
-  { 
+  {
     "account_id" : "a2esd212343123",
     "user_id" : "123",
-    "money": 11000.00
+    "amount": 11000.00
   },
-  { 
+  {
     "account_id" : "a3esd212343123",
     "user_id" : "123",
-    "money": 113300.00              
+    "amount": 113300.00              
   }
 ]
