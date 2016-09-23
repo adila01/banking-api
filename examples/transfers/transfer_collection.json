@@ -2,13 +2,13 @@
   { 
     "sourceAccount_id" : "3523djfg329548",
     "targetAccount_id" : "a2esd212343123",
-    "amount": 1200.00,
-    "description": "This is the description provided by the sourceAccount"
+    "amount": 27.00,
+    "description": "My share of last night's dinner"
   },
   { 
     "sourceAccount_id" : "3523djfg123123",
     "targetAccount_id" : "a2esd212343123",
     "ammount": 1324.00,
-    "description": "This is completly different description"
+    "description": "rent June 2015"
   }
 ]

@@ -10,5 +10,14 @@ get:
         application/json:
           schema: !include ../../schemas/customers/customer_member.json
           example: !include ../../examples/customers/customer_member.json
+    404:
+      body:
+        application/json:
+          example: !include ../../examples/generic/404-notfound.json
 delete:
   description: Remove a specific customer
+  responses:
+    204:
+      body:
+        application/json:
+          example: !include ../../examples/generic/204-no_content.json

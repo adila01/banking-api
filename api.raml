@@ -1,8 +1,7 @@
 #%RAML 1.0
 title: ACME Banking API
 version: 2.0
-#baseUri: http://www.placeholder.com/api
-baseUri: https://mocksvc.mulesoft.com/mocks/7f0cdbbb-48c0-4a1a-9545-2406a61a9e96/api
+baseUri: http://www.placeholder.com/api
 
 documentation:
   - title: ACME Banking API
@@ -12,14 +11,14 @@ documentation:
 mediaType: application/json
 
 resourceTypes:
-  generic_collection: !include resourcetypes/generic/generic_collection.yml
-  generic_member: !include resourcetypes/generic/generic_member.yml
-  customer_collection: !include resourcetypes/customers/customer_collection.yml
-  customer_member: !include resourcetypes/customers/customer_member.yml
-  account_collection: !include resourcetypes/accounts/account_collection.yml
-  account_member: !include resourcetypes/accounts/account_member.yml
-  transfer_collection: !include resourcetypes/transfers/transfer_collection.yml
-  transfer_member: !include resourcetypes/transfers/transfer_member.yml
+  generic_collection  : !include resourcetypes/generic/generic_collection.yml
+  generic_member      : !include resourcetypes/generic/generic_member.yml
+  customer_collection : !include resourcetypes/customers/customer_collection.yml
+  customer_member     : !include resourcetypes/customers/customer_member.yml
+  account_collection  : !include resourcetypes/accounts/account_collection.yml
+  account_member      : !include resourcetypes/accounts/account_member.yml
+  transfer_collection : !include resourcetypes/transfers/transfer_collection.yml
+  transfer_member     : !include resourcetypes/transfers/transfer_member.yml
 
 traits:
   searchable: !include traits/searchable.yml

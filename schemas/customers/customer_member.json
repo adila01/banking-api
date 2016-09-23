@@ -1,20 +1,25 @@
 {
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "$schema": "http://json-schema.org/draft-03/schema",
-  "id": "http://jsonschema.net",
-  "required": true,
+  "description" : "customer_member",  
   "properties": {
-    "id": {
-      "type": "string",
-      "required": true
-      },
-    "userName": {
-      "type": "string",
-      "required": true
-      },
+    "user_id": {
+      "type": "string"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
     "dob": {
-      "type": "string",
-      "required": true
-      }
+      "type": "string"
     }
+  },
+  "id": "/",
+  "required": [
+    "user_id",
+    "user_name",
+    "dob"
+  ]
 }

@@ -1,7 +1,7 @@
 queryParameters:
-  user:
+  client_id:
     type: string
     required: true
-  password:
+  client_secret:
     type: string
     required: true
