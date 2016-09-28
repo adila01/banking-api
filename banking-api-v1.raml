@@ -32,7 +32,30 @@ mediaType: application/json
                 "dob": "01/01/1970"
               }
             ]
+      404:
+        body:
+          example: |
+            {
+              "http.statuscode" : 404,
+              "message" : "Resource not found."
+            }
   post:
+    description: Adds a new user to the bank's customer listing
+    body:
+      example: |
+        {
+          "user_name": "John Doe",
+          "description": "This is the ACME account of John Doe",
+          "dob": "01/01/1970"
+        }
+    responses:
+      201:
+        body:
+          example: |
+            {
+              "http.statuscode" : 201,
+              "message" : "Resource created."
+            }
   /{customer_id}:
     get:
       description: Retrieve a specific customer
@@ -46,14 +69,48 @@ mediaType: application/json
                 "description": "This is the ACME account of Ray Charles",
                 "dob": "01/01/1970"
               }
+        404:
+          body:
+            example: |
+              {
+                "http.statuscode" : 404,
+                "message" : "Resource not found."
+              }
     delete:
       description: Delete a specific customer
       responses:
         200:
+          body:
+            example: |
+              {
+                "http.statuscode" : 200,
+                "message" : "Operation completed successfully."
+              }
     put:
       description: Update or create a specific customer
+      body:
+        example: |
+          {
+            "user_id": "9999",
+            "user_name": "John Doe",
+            "description": "This is the ACME account of John Doe",
+            "dob": "01/01/1970"
+          }
       responses:
+        200:
+          body:
+            example: |
+              {
+                "http.statuscode" : 200,
+                "message" : "Operation completed successfully."
+              }
         201:
+          body:
+            example: |
+              {
+                "http.statuscode" : 201,
+                "message" : "Resource created."
+              }
     /accounts:
       get:
         description: Retrieve a list of accounts belonging to a specific customer
@@ -78,9 +135,22 @@ mediaType: application/json
                   }
                 ]
       post:
-        description: Add a new back account to a specific customer
+        description: Add a new bank account to a specific customer
+        body:
+          example: |
+            {
+              "account_type" : "checking",
+              "customer_id" : "9999",
+              "balance": 0.00
+            }
         responses:
           201:
+            body:
+              example: |
+                {
+                  "http.statuscode" : 201,
+                  "message" : "Resource created."
+                }
       /{account_id}:
         get:
           description: Retrieve a bank account belonging to a specific customer
@@ -94,14 +164,40 @@ mediaType: application/json
                     "customer_id" : "1234",
                     "balance": 113300.00
                   }
+            404:
+              body:
+                example: |
+                  {
+                    "http.statuscode" : 404,
+                    "message" : "Resource not found."
+                  }
         put:
           description: Update a bank account belonging to a specific customer
           responses:
+            200:
+              body:
+                example: |
+                  {
+                    "http.statuscode" : 200,
+                    "message" : "Operation completed successfully."
+                  }
             201:
+              body:
+                example: |
+                  {
+                    "http.statuscode" : 201,
+                    "message" : "Resource created."
+                  }
         delete:
           description: Close a bank account belonging to a specific customer
           responses:
             200:
+              body:
+                example: |
+                  {
+                    "http.statuscode" : 200,
+                    "message" : "Operation completed successfully."
+                  }
         /outgoingTransfers:
           get:
             description: Retrieve a list of transfers that have been sent from a customer's bank account
@@ -127,6 +223,12 @@ mediaType: application/json
             description: Create a new outgoing transaction
             responses:
               201:
+                body:
+                  example: |
+                    {
+                      "http.statuscode" : 201,
+                      "message" : "Resource created."
+                    }
           /{transfer_id}:
             get:
               description: Retrieve a specific transfer that has been sent from a customer's bank account
@@ -139,6 +241,13 @@ mediaType: application/json
                         "targetAccount_id" : "3523djfg329548",
                         "amount": 1000.00,
                         "description": "This is the description of a particular transaction that you provided at creation."
+                      }
+                404:
+                  body:
+                    example: |
+                      {
+                        "http.statuscode" : 404,
+                        "message" : "Resource not found."
                       }
         /incomingTransfers:
           get:
@@ -173,6 +282,13 @@ mediaType: application/json
                         "targetAccount_id" : "3523djfg329548",
                         "amount": 1000.00,
                         "description": "This is the description of a particular transaction that you provided at creation."
+                      }
+                404:
+                  body:
+                    example: |
+                      {
+                        "http.statuscode" : 404,
+                        "message" : "Resource not found."
                       }
 /transfers:
  get:
