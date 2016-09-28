@@ -10,12 +10,15 @@ get:
     404:
       body:
         application/json:
-          example: !include ../../examples/generic/404-notfound.json               
+          example: !include ../../examples/generic/404-notfound.json
 post:
   description: Create a new outgoing transaction.
+  body:
+    application/json:
+      example: !include ../../examples/transfers/transfer_member.json
+      schema: !include ../../schemas/transfers/transfer_member.json
   responses:
     201:
       body:
         application/json:
-          example: !include ../../examples/transfers/transfer_member.json
-          schema: !include ../../schemas/transfers/transfer_member.json
+          example: !include ../../examples/generic/201-created.json

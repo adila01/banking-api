@@ -1,0 +1,24 @@
+/customers:
+  get:
+  post:
+  /{customer_id}:
+    get:
+    delete:
+    /accounts:
+      get:
+      post:
+      /{account_id}:
+        get:
+        /outgoingTransfers:
+          get:
+          post:
+          /{transfer_id}:
+            get:
+        /incomingTransfers:
+          get:
+          post:
+          /{transfer_id}:
+            get:
+    /transfers:
+     get:
+     post:
