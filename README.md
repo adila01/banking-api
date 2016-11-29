@@ -6,7 +6,7 @@ This is a description of ACME Bank's internal APIs.
 Your task is to design an API based on a set of functional requirements, recorded as user stories
 
 #### API Design Requirements
-As a bank employee I want to:
+"As a bank employee I want to..."
 ```
 [FR-001] Update bank account information
 [FR-002] Replace a customer's information
