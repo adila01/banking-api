@@ -11,9 +11,9 @@ documentation:
 mediaType: application/json
 
 /customers:
-  description: The full collection of all users with accounts at the bank
+  description: "The full collection of all users with accounts at the bank"
   get:
-    description: [FR-005] Retrieve a full list of customers
+    description: "[FR-005] Retrieve a full list of customers"
     responses:
       200:
         body:
@@ -40,7 +40,7 @@ mediaType: application/json
               "message" : "Resource not found."
             }
   post:
-    description: [FR-010] Add a new customer
+    description: "[FR-010] Add a new customer"
     body:
       example: |
         {
@@ -87,7 +87,7 @@ mediaType: application/json
                 "message" : "Operation completed successfully."
               }
     put:
-      description: [FR-002] Update or create a specific customer
+      description: "[FR-002] Update or create a specific customer"
       body:
         example: |
           {
@@ -113,7 +113,7 @@ mediaType: application/json
               }
     /accounts:
       get:
-        description: [FR-012] Get a list of accounts belonging to a particular customer
+        description: "[FR-012] Get a list of accounts belonging to a particular customer"
         responses:
           200:
             body:
@@ -135,7 +135,7 @@ mediaType: application/json
                   }
                 ]
       post:
-        description: [FR-006] Add an account to a customer
+        description: "[FR-006] Add an account to a customer"
         body:
           example: |
             {
@@ -153,7 +153,7 @@ mediaType: application/json
                 }
       /{account_id}:
         get:
-          description: [FR-011] Retrieve a detailed account report
+          description: "[FR-011] Retrieve a detailed account report"
           responses:
             200:
               body:
@@ -172,7 +172,7 @@ mediaType: application/json
                     "message" : "Resource not found."
                   }
         put:
-          description: Update a bank account belonging to a specific customer
+          description: "[FR-001] Update bank account information"
           responses:
             200:
               body:
@@ -189,7 +189,7 @@ mediaType: application/json
                     "message" : "Resource created."
                   }
         delete:
-          description: [FR-007] Remove an account from a customer
+          description: "[FR-007] Remove an account from a customer"
           responses:
             200:
               body:
@@ -200,7 +200,7 @@ mediaType: application/json
                   }
         /outgoingTransfers:
           get:
-            description: [FR-008] Retrieve a list of a customer’s outgoing transfers
+            description: "[FR-008] Retrieve a list of a customer’s outgoing transfers"
             responses:
               200:
                 body:
@@ -220,7 +220,7 @@ mediaType: application/json
                       }
                     ]
           post:
-            description: [FR-009] Create an outgoing transfer from a customer’s account to another account
+            description: "[FR-009] Create an outgoing transfer from a customer’s account to another account"
             responses:
               201:
                 body:
@@ -231,7 +231,7 @@ mediaType: application/json
                     }
           /{transfer_id}:
             get:
-              description: [FR-014] Retrieve details on a particular outgoing transfer
+              description: "[FR-014] Retrieve details on a particular outgoing transfer"
               responses:
                 200:
                   body:
@@ -251,7 +251,7 @@ mediaType: application/json
                       }
         /incomingTransfers:
           get:
-            description: [FR-013] Retrieve a list of incoming transfers for a particular bank account
+            description: "[FR-013] Retrieve a list of incoming transfers for a particular bank account"
             responses:
               200:
                 body:
@@ -272,7 +272,7 @@ mediaType: application/json
                     ]
           /{transfer_id}:
             get:
-              description: [FR-003] Retrieve details on a particular incoming transfer
+              description: "[FR-003] Retrieve details on a particular incoming transfer"
               responses:
                 200:
                   body:
@@ -292,7 +292,7 @@ mediaType: application/json
                       }
 /transfers:
  get:
-   description: [FR-004] Retrieve a list of all transfers, both incoming and outgoing.
+   description: "[FR-004] Retrieve a list of all transfers, both incoming and outgoing."
    responses:
      200:
        body:
