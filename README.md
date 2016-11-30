@@ -34,7 +34,7 @@ Create an actual API definition in the [Anypoint API Designer](https://www.mules
 * HTTP response types
 * Sample responses
 
-**Exercise 2: API refinement**  
+**Exercise 3: API refinement**  
 The last part of this exercise consists of refactoring the API design you created in the previous steps into a full­fledged RAML API:
 * Identify possible   traits  (reusable behavioural elements). Think of applying paging to large sets of data or searching options. Try to refactor code duplicates into reusable elements.
 * Identify data types and data models. Assume all data will be in JSON format. Provide examples in JSON and define   resourcetypes. 
