@@ -3,4 +3,4 @@ description: This is a collection
 get:
   description: Get all <<resourcePathName>>, optionally filtered
 post:
-  description: Create a new <<resourcePathName | !singularize>>
+  description: Create a new <<resourcePathName|!singularize>>
