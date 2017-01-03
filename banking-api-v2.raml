@@ -1,6 +1,6 @@
-#%RAML 1.0
+#%RAML 0.8
 title: ACME Banking API
-version: v2
+version: 2.0
 baseUri: http://www.placeholder.com/api/{version}/
 
 documentation:
@@ -10,39 +10,152 @@ documentation:
 
 mediaType: application/json
 
+schemas:
+  - Customer: !include schemas/customers/customer_member.json
+  - Account: !include schemas/accounts/account_member.json    
+
 resourceTypes:
-  generic_collection  : !include resourcetypes/generic/generic_collection.yml
-  generic_member      : !include resourcetypes/generic/generic_member.yml
-  customer_collection : !include resourcetypes/customers/customer_collection.yml
-  customer_member     : !include resourcetypes/customers/customer_member.yml
-  account_collection  : !include resourcetypes/accounts/account_collection.yml
-  account_member      : !include resourcetypes/accounts/account_member.yml
-  transfer_collection : !include resourcetypes/transfers/transfer_collection.yml
-  transfer_member     : !include resourcetypes/transfers/transfer_member.yml
+  - collection: !include resourcetypes/generic/generic_collection.yml
+  - member: !include resourcetypes/generic/generic_member.yml
 
 traits:
-  searchable: !include traits/searchable.yml
-  orderable: !include traits/orderable.yml
-  pageable: !include traits/pageable.yml
-  basic_authenticated: !include traits/basic_authenticated.yml
+  - searchable: !include traits/searchable.yml
+  - orderable: !include traits/orderable.yml
+  - pageable: !include traits/pageable.yml
 
+securitySchemes:
+  - oauth_2_0: !include security/oauth_2_0.yml
 
 /customers:
-  description: The full collection of all users with accounts at the bank.
-  type: customer_collection
-  /{customer_id}:
-    type: customer_member
-    /accounts:
-      type: account_collection
-      /{account_id}:
-        type: account_member
-        /outgoingTransfers:
-          type: transfer_collection
-          /{transfer_id}:
-            type: transfer_member
-        /incomingTransfers:
-          type: transfer_collection
-          /{transfer_id}:
-            type: transfer_member
+   description: Full collection of the bank's customers
+   get:
+      description: Retrieve a list of all the bank's customers.
+      responses:
+         200:
+            body:
+               example: !include examples/customers/customer_collection.json
+         404:
+            body:
+               example: !include examples/generic/404-notfound.json
+   post:
+      description: Adds a new user to the bank's customer listing
+      body:
+         schema: !include schemas/customers/customer_member.json
+         example: !include examples/customers/customer_member.json
+      responses:
+         201:
+            body:
+                example: !include examples/generic/201-created.json
+   /{customer_id}:
+      description: A single customer
+      get:
+         description: Retrieve a specific customer
+         responses:
+            200:
+               body:
+                  schema: !include schemas/customers/customer_member.json
+                  example: !include examples/customers/customer_member.json
+            404:
+               body:
+                  example: !include examples/generic/404-notfound.json
+      delete:
+         description: Remove a specific customer
+         responses:
+            200:
+               body:
+                  example: !include examples/generic/200-ok.json
+      put:
+         description: Update or create a specific customer
+         body:
+            schema: !include schemas/customers/customer_member.json
+            example: !include examples/customers/customer_member.json
+         responses:
+            200:
+               body:
+                  example: !include examples/generic/200-ok.json
+            201:
+               body:
+                  example: !include examples/generic/201-created.json
+      /accounts:
+         description: Collection of bank accounts
+         get:
+            description: Retrieve a list of bank accounts
+            responses:
+               200:
+                  body:
+                     example: !include examples/accounts/account_collection.json
+               404:
+                  body:
+                     example: !include examples/generic/404-notfound.json
+         post:
+            description: Add a new bank account to a customer
+            body:
+               schema: !include schemas/accounts/account_member.json
+               example: !include examples/accounts/account_member.json
+            responses:
+               201:
+                  body:
+                     example: !include examples/generic/201-created.json
+         /{account_id}:
+            description: A single account
+            get:
+               description: Retrieve a specific account
+               responses:
+                  200:
+                     body:
+                        schema: !include schemas/accounts/account_member.json
+                        example: !include examples/accounts/account_member.json
+                  404:
+                     body:
+                        example: !include examples/generic/404-notfound.json
+            delete:
+               description: Remove a bank account
+               responses:
+                  200:
+                     body:
+                        example: !include examples/generic/200-ok.json
+            put:
+               description: Update or create a specific account
+               body:
+                  schema: !include schemas/accounts/account_member.json
+                  example: !include examples/accounts/account_member.json
+               responses:
+                  200:
+                     body:
+                        example: !include examples/generic/200-ok.json
+                  201:
+                     body:
+                        example: !include examples/generic/201-created.json
+            /outgoingTransfers:
+                get:
+                  is: [pageable]     
+                  description: Retrieve a list of transfers that have been sent from a customer's bank account.
+                  body: 
+                    example:
+                      !include examples/transfers/transfer_collection.json
+                post:
+                  description: Create a new outgoing transaction.
+                  body:
+                    example:
+                      !include examples/transfers/transfer_member.json
+                /{transfer_id}:
+                  get:
+                    body:
+                      example:
+                        !include examples/transfers/transfer_member.json
+            /incomingTransfers:
+              get:
+                body: 
+                  example:
+                    !include examples/transfers/transfer_collection.json
+              /{transfer_id}:
+                get:
+                  body:
+                    example:
+                      !include examples/transfers/transfer_member.json
 /transfers:
- type: transfer_collection
+  get:
+    description: Retrieve a list of all incoming and outgoing transfers associated with a particular customer.
+    body: 
+      example:
+        !include examples/transfers/transfer_collection.json
