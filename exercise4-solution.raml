@@ -11,14 +11,20 @@ documentation:
 mediaType: application/json
 
 schemas:
-  - Customer: !include schemas/customers/customer_member.json
-  - Account: !include schemas/accounts/account_member.json
+  - customer_collection: !include schemas/customers/customer_collection.json
+  - customer_member: !include schemas/customers/customer_member.json
+  - account_collection: !include schemas/accounts/account_collection.json
+  - account_member: !include schemas/accounts/account_member.json
+  - transfer_collection: !include schemas/transfers/transfer_collection.json
+  - transfer_member: !include schemas/transfers/transfer_member.json
+  - generic_message: !include schemas/generic/generic_message.json
 
 resourceTypes:
   - collection: !include resourcetypes/generic/generic_collection.yml
   - member: !include resourcetypes/generic/generic_member.yml
 
 traits:
+  - secured: !include traits/basic_authenticated.yml 
   - searchable: !include traits/searchable.yml
   - orderable: !include traits/orderable.yml
   - pageable: !include traits/pageable.yml
@@ -27,16 +33,18 @@ securitySchemes:
   - oauth_2_0: !include security/oauth_2_0.yml
 
 /customers:
+   is: [secured]
    description: Full collection of the bank's customers
    get:
       description: "[FR-005] Retrieve a full list of customers"
       responses:
          200:
             body:
-               schema: !include schemas/customers/customer_collection.json
+               schema: customer
                example: !include examples/customers/customer_collection.json
          404:
             body:
+               schema: generic
                example: !include examples/generic/404-notfound.json
    post:
       description: "[FR-010] Add a new customer"
@@ -123,11 +131,11 @@ securitySchemes:
                   example: !include examples/accounts/account_member.json
                responses:
                   200:
-                     body:
-                        example: !include examples/generic/200-ok.json
+                    body:
+                      example: !include examples/generic/200-ok.json
                   201:
-                     body:
-                        example: !include examples/generic/201-created.json
+                    body:
+                      example: !include examples/generic/201-created.json
             /outgoingTransfers:
                 get:
                   is: [pageable]
@@ -143,9 +151,9 @@ securitySchemes:
                     schema: !include schemas/transfers/transfer_member.json
                     example: !include examples/transfers/transfer_member.json
                   responses:
-                     201:
-                        body:
-                           example: !include examples/generic/201-created.json
+                    201:
+                      body:
+                        example: !include examples/generic/201-created.json
                 /{transfer_id}:
                   get:
                     description: "[FR-014] Retrieve details on a particular outgoing transfer"
@@ -155,8 +163,8 @@ securitySchemes:
                           schema: !include schemas/transfers/transfer_member.json
                           example: !include examples/transfers/transfer_member.json
                       404:
-                         body:
-                            example: !include examples/generic/404-notfound.json
+                        body:
+                          example: !include examples/generic/404-notfound.json
             /incomingTransfers:
               get:
                 description: "[FR-013] Retrieve a list of incoming transfers for a particular bank account"
@@ -174,8 +182,8 @@ securitySchemes:
                         schema: !include schemas/transfers/transfer_member.json
                         example: !include examples/transfers/transfer_member.json
                     404:
-                       body:
-                          example: !include examples/generic/404-notfound.json
+                      body:
+                        example: !include examples/generic/404-notfound.json
 /transfers:
   get:
     description: "[FR-004] Retrieve a list of all transfers, both incoming and outgoing."

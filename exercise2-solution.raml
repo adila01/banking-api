@@ -17,6 +17,8 @@ baseUri: http://www.placeholder.com/api/{version}/
     /accounts:
       get:
         description: "[FR-012] Get a list of accounts belonging to a particular customer"
+      post:
+        description: "[FR-006] Add an account to a customer"
       /{account_id}:
         get:
           description: "[FR-011] Retrieve a detailed account report"
