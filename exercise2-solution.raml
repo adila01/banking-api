@@ -57,6 +57,10 @@ mediaType: application/json
               "message" : "Resource created."
             }
   /{customer_id}:
+    uriParameters:
+      customer_id:
+        displayName: Customer ID
+        type: string
     get:
       description: Retrieve a specific customer
       responses:
