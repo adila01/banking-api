@@ -1,0 +1,186 @@
+#%RAML 0.8
+title: ACME Banking API
+version: 2.0
+baseUri: http://www.placeholder.com/api/{version}/
+
+documentation:
+  - title: ACME Banking API
+    content: |
+      This is the full API for instructors to use as a sample solution for the API Design and Architecture class.
+
+mediaType: application/json
+
+schemas:
+  - Customer: !include schemas/customers/customer_member.json
+  - Account: !include schemas/accounts/account_member.json
+
+resourceTypes:
+  - collection: !include resourcetypes/generic/generic_collection.yml
+  - member: !include resourcetypes/generic/generic_member.yml
+
+traits:
+  - searchable: !include traits/searchable.yml
+  - orderable: !include traits/orderable.yml
+  - pageable: !include traits/pageable.yml
+
+securitySchemes:
+  - oauth_2_0: !include security/oauth_2_0.yml
+
+/customers:
+   description: Full collection of the bank's customers
+   get:
+      description: "[FR-005] Retrieve a full list of customers"
+      responses:
+         200:
+            body:
+               schema: !include schemas/customers/customer_collection.json
+               example: !include examples/customers/customer_collection.json
+         404:
+            body:
+               example: !include examples/generic/404-notfound.json
+   post:
+      description: "[FR-010] Add a new customer"
+      body:
+         schema: !include schemas/customers/customer_member.json
+         example: !include examples/customers/customer_member.json
+      responses:
+         201:
+            body:
+                example: !include examples/generic/201-created.json
+   /{customer_id}:
+      description: A single customer
+      get:
+         description: "[FR-015] Retrieve details on a particular customer"
+         responses:
+            200:
+               body:
+                  schema: !include schemas/customers/customer_member.json
+                  example: !include examples/customers/customer_member.json
+            404:
+               body:
+                  example: !include examples/generic/404-notfound.json
+      delete:
+         description: Remove a specific customer
+         responses:
+            200:
+               body:
+                  example: !include examples/generic/200-ok.json
+      put:
+         description: "[FR-002] Update or create a specific customer"
+         body:
+            schema: !include schemas/customers/customer_member.json
+            example: !include examples/customers/customer_member.json
+         responses:
+            200:
+               body:
+                  example: !include examples/generic/200-ok.json
+            201:
+               body:
+                  example: !include examples/generic/201-created.json
+      /accounts:
+         description: "[FR-012] Get a list of accounts belonging to a particular customer"
+         get:
+            description: Retrieve a list of bank accounts
+            responses:
+               200:
+                  body:
+                     schema: !include schemas/accounts/account_collection.json
+                     example: !include examples/accounts/account_collection.json
+               404:
+                  body:
+                     example: !include examples/generic/404-notfound.json
+         post:
+            description: "[FR-006] Add an account to a customer"
+            body:
+               schema: !include schemas/accounts/account_member.json
+               example: !include examples/accounts/account_member.json
+            responses:
+               201:
+                  body:
+                     example: !include examples/generic/201-created.json
+         /{account_id}:
+            description: "[FR-011] Retrieve a detailed account report"
+            get:
+               description: Retrieve a specific account
+               responses:
+                  200:
+                     body:
+                        schema: !include schemas/accounts/account_member.json
+                        example: !include examples/accounts/account_member.json
+                  404:
+                     body:
+                        example: !include examples/generic/404-notfound.json
+            delete:
+               description: "[FR-007] Remove an account from a customer"
+               responses:
+                  200:
+                     body:
+                        example: !include examples/generic/200-ok.json
+            put:
+               description: "[FR-001] Update bank account information"
+               body:
+                  schema: !include schemas/accounts/account_member.json
+                  example: !include examples/accounts/account_member.json
+               responses:
+                  200:
+                     body:
+                        example: !include examples/generic/200-ok.json
+                  201:
+                     body:
+                        example: !include examples/generic/201-created.json
+            /outgoingTransfers:
+                get:
+                  is: [pageable]
+                  description: "[FR-008] Retrieve a list of a customer’s outgoing transfers"
+                  responses:
+                    200:
+                      body:
+                        schema: !include schemas/transfers/transfer_collection.json
+                        example: !include examples/transfers/transfer_collection.json
+                post:
+                  description: "[FR-009] Create an outgoing transfer from a customer’s account to another account"
+                  body:
+                    schema: !include schemas/transfers/transfer_member.json
+                    example: !include examples/transfers/transfer_member.json
+                  responses:
+                     201:
+                        body:
+                           example: !include examples/generic/201-created.json
+                /{transfer_id}:
+                  get:
+                    description: "[FR-014] Retrieve details on a particular outgoing transfer"
+                    responses:
+                      200:
+                        body:
+                          schema: !include schemas/transfers/transfer_member.json
+                          example: !include examples/transfers/transfer_member.json
+                      404:
+                         body:
+                            example: !include examples/generic/404-notfound.json
+            /incomingTransfers:
+              get:
+                description: "[FR-013] Retrieve a list of incoming transfers for a particular bank account"
+                responses:
+                  200:
+                    body:
+                      schema: !include schemas/transfers/transfer_collection.json
+                      example: !include examples/transfers/transfer_collection.json
+              /{transfer_id}:
+                get:
+                  description: "[FR-003] Retrieve details on a particular incoming transfer"
+                  responses:
+                    200:
+                      body:
+                        schema: !include schemas/transfers/transfer_member.json
+                        example: !include examples/transfers/transfer_member.json
+                    404:
+                       body:
+                          example: !include examples/generic/404-notfound.json
+/transfers:
+  get:
+    description: "[FR-004] Retrieve a list of all transfers, both incoming and outgoing."
+    responses:
+      200:
+        body:
+          schema: !include schemas/transfers/transfer_collection.json
+          example: !include examples/transfers/transfer_collection.json
