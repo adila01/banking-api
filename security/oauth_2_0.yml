@@ -5,13 +5,13 @@ describedBy:
     headers:
         Authorization:
             description: |
-               Used to send a valid OAuth 2 access token. Do not use 
+               Used to send a valid OAuth 2 access token. Do not use
                with the "access_token" query string parameter.
             type: string
     queryParameters:
         access_token:
             description: |
-               Used to send a valid OAuth 2 access token. Do not use together with 
+               Used to send a valid OAuth 2 access token. Do not use together with
                the "Authorization" header
             type: string
     responses:
@@ -27,4 +27,4 @@ describedBy:
 settings:
   authorizationUri: https://www.placeholder.com/1/oauth2/authorize
   accessTokenUri: https://api.placeholder.com/1/oauth2/token
-  authorizationGrants: [ code, token ]
+  authorizationGrants: [authorization_code]

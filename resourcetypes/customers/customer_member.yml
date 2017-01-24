@@ -1,7 +1,7 @@
 description: A single customer
 uriParameters:
   customer_id:
-    type: integer
+    type: string
 get:
   description: Retrieve a specific customer
   responses:
@@ -13,6 +13,7 @@ get:
     404:
       body:
         application/json:
+          schema: !include ../../schemas/generic/generic_message.json
           example: !include ../../examples/generic/404-notfound.json
 delete:
   description: Remove a specific customer
@@ -20,6 +21,7 @@ delete:
     200:
       body:
         application/json:
+          schema: !include ../../schemas/generic/generic_message.json
           example: !include ../../examples/generic/200-ok.json
 put:
   description: Update or create a specific customer
@@ -31,7 +33,9 @@ put:
     200:
       body:
         application/json:
+          schema: !include ../../schemas/generic/generic_message.json
           example: !include ../../examples/generic/200-ok.json
     201:
       body:
+        schema: !include ../../schemas/generic/generic_message.json
         example: !include ../../examples/generic/201-created.json

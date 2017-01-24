@@ -1,6 +1,6 @@
 queryParameters:
-  offset:
-    description: Skip over a number of elements by specifying an offset value for the query
+  pagesize:
+    description: Number of elements per page
     type: integer
     required: false
     example: 20
