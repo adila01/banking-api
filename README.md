@@ -1,6 +1,8 @@
 # ACME Bank - API design exercise
 
-This is a description of ACME Bank's internal APIs.
+These exercises are part of the [Anypoint Platform Development API Design](https://training.mulesoft.com/instructor-led-training/apdev-api-design) and [Anypoint Platform Architecture Solution Design](https://training.mulesoft.com/instructor-led-training/aparch-solution-design) training courses.
+
+The goal is to design an API based on a set of requirements. Your task is to translate the requirements into an API design and document the design using the [RAML](http://raml.org) language.
 
 **API Design Requirements**  
 "As a bank employee I want to..."
@@ -23,10 +25,10 @@ This is a description of ACME Bank's internal APIs.
 ```
 
 **Exercise 1: API basics**  
-* Your task is to design an API based on a set of functional requirements, recorded as user stories.
-* Start white-boarding the basics of the API. Focus only on identifying resources (both collections and members) and methods.  
-_Remember: Resources = nouns, methods = HTTP verbs._  
-Remain at this high­ level.
+Start white-boarding the basics of the API. 
+* Focus only on identifying resources (both collections and members) and methods.  
+* Remember: Resources = nouns, methods = HTTP verbs.
+* Remain at this high­ level.
 
 **Exercise 2: API definition with RAML**  
 Based on the identified resources and operations, start working on a [RAML](http://raml.org) based API definition.  
