@@ -1,4 +1,4 @@
-# ACME Bank API * Design exercise
+# ACME Bank - API design exercise
 
 This is a description of ACME Bank's internal APIs.
 
@@ -24,28 +24,30 @@ This is a description of ACME Bank's internal APIs.
 
 **Exercise 1: API basics**  
 * Your task is to design an API based on a set of functional requirements, recorded as user stories.
-* Start whiteboarding the basics of the API. Focus only on identifying resources (collections and members) and operations.  
+* Start white-boarding the basics of the API. Focus only on identifying resources (both collections and members) and methods.  
 _Remember: Resources = nouns, methods = HTTP verbs._  
 Remain at this high­ level.
 
-**Exercise 2: API definition**  
-* Based on the identified resources and operations, start working on a [RAML](http://raml.org) based API definition.  
-* Create an actual API definition in the [Anypoint API Designer](https://www.mulesoft.com/platform/api/anypoint-designer), [API Workbench](http://apiworkbench.com/)  or any other text editor of choice.
+**Exercise 2: API definition with RAML**  
+Based on the identified resources and operations, start working on a [RAML](http://raml.org) based API definition.  
+* Create an actual API definition in the [Anypoint API Designer](https://www.mulesoft.com/platform/api/anypoint-designer), [API Workbench](http://apiworkbench.com/), or any other text editor of choice.
 * For now, only add resources and methods.
 
 **Exercise 3: API refinement**  
 Use the identified resources and operations as a starting point and add the following elements:
 * Documentation/API descriptions
-* Mediatypes
+* Media types
 * HTTP response types
-* Sample responses
+* Sample [responses](http://raml.org/developers/raml-100-tutorial#enter-responses). Assume all data will be in JSON format.
 
 **Exercise 4: further API refinement**  
-The last part of this exercise consists of refactoring the API design you created in the previous steps into a full­fledged [RAML](http://raml.org) API:
-* Identify possible [traits](http://raml.org/developers/raml-200-tutorial#traits) (reusable behavioural elements). Think of applying paging to large sets of data or searching options. Try to refactor code duplicates into reusable elements.
-* Identify data types and data models. Assume all data will be in JSON format. Provide examples in JSON and define [resourcetypes](http://raml.org/developers/raml-200-tutorial#resource-types).
+This exercise consists of refactoring the API design you created in the previous steps into a full ­fledged [RAML](http://raml.org) API:
+* Identify possible [traits](http://raml.org/developers/raml-200-tutorial#traits) (reusable behavioral elements). Think of applying paging to large sets of data or searching options.
+* Provide [schemas](http://raml.org/developers/raml-200-tutorial#extract-schemas) for data elements, such as API responses and request bodies. Hint: schemas can be [generated](http://jsonschema.net/#/) from your sample data.
 * Review the structure and hierarchy of your API. Apply design recommendations and best practices.
+* Extract all defined traits, samples and schemas into external files, which can be referenced using the [include](http://raml.org/developers/raml-200-tutorial#includes) keyword.
 
-**Exercise 5: API refactoring**
-After completing exercise 3, which focused on extracting code duplicates to traits and external examples and schemas, make another pass of your API.
-Without the "clutter" of examples etc, see if you can refactor the new API by finding repetitions. Create Resource Types of further of any code duplicates/reperitions.
+**Exercise 5: API refactoring**  
+After completing exercise 4, which focused on extracting code duplicates to traits and external examples and schemas, make another pass of your API. Without the "clutter" of examples etc, see if you can refactor the new API by finding repetitions.
+* Try to refactor code duplicates/repetitions into reusable elements, such as [resource types](http://raml.org/developers/raml-200-tutorial#resource-types).
+* Try to minimize the amount of code in the main RAML file. How much can be extracted into separate resource types, preferably stored in external files?

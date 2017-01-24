@@ -6,10 +6,12 @@ get:
     200:
       body:
         application/json:
+          schema: !include ../../schemas/transfers/transfer_collection.json
           example: !include ../../examples/transfers/transfer_collection.json
     404:
       body:
         application/json:
+          schema: !include ../../schemas/generic/generic_message.json
           example: !include ../../examples/generic/404-notfound.json
 post:
   description: Create a new outgoing transaction.
@@ -21,4 +23,5 @@ post:
     201:
       body:
         application/json:
+          schema: !include ../../schemas/generic/generic_message.json
           example: !include ../../examples/generic/201-created.json

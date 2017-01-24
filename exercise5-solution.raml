@@ -1,4 +1,4 @@
-#%RAML 0.8
+#%RAML 1.0
 title: ACME Banking API
 version: 3.0
 baseUri: http://www.placeholder.com/api/{version}/
@@ -11,20 +11,20 @@ documentation:
 mediaType: application/json
 
 resourceTypes:
-  - generic_collection  : !include resourcetypes/generic/generic_collection.yml
-  - generic_member      : !include resourcetypes/generic/generic_member.yml
-  - customer_collection : !include resourcetypes/customers/customer_collection.yml
-  - customer_member     : !include resourcetypes/customers/customer_member.yml
-  - account_collection  : !include resourcetypes/accounts/account_collection.yml
-  - account_member      : !include resourcetypes/accounts/account_member.yml
-  - transfer_collection : !include resourcetypes/transfers/transfer_collection.yml
-  - transfer_member     : !include resourcetypes/transfers/transfer_member.yml
+  generic_collection  : !include resourcetypes/generic/generic_collection.yml
+  generic_member      : !include resourcetypes/generic/generic_member.yml
+  customer_collection : !include resourcetypes/customers/customer_collection.yml
+  customer_member     : !include resourcetypes/customers/customer_member.yml
+  account_collection  : !include resourcetypes/accounts/account_collection.yml
+  account_member      : !include resourcetypes/accounts/account_member.yml
+  transfer_collection : !include resourcetypes/transfers/transfer_collection.yml
+  transfer_member     : !include resourcetypes/transfers/transfer_member.yml
 
 traits:
-  - searchable: !include traits/searchable.yml
-  - orderable: !include traits/orderable.yml
-  - pageable: !include traits/pageable.yml
-  - basic_authenticated: !include traits/basic_authenticated.yml
+  searchable: !include traits/searchable.yml
+  orderable: !include traits/orderable.yml
+  pageable: !include traits/pageable.yml
+  basic_authenticated: !include traits/basic_authenticated.yml
 
 
 /customers:

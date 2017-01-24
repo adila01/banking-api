@@ -1,4 +1,4 @@
-#%RAML 0.8
+#%RAML 1.0
 title: ACME Banking API
 version: 1.0
 baseUri: http://www.placeholder.com/api/{version}/
@@ -154,6 +154,9 @@ mediaType: application/json
                   "message" : "Resource created."
                 }
       /{account_id}:
+        uriParameters:
+          account_id:
+            type: integer
         get:
           description: "[FR-011] Retrieve a detailed account report"
           responses:
